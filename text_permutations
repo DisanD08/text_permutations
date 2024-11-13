@@ -1,0 +1,28 @@
+
+text_list = input("-> ").split()
+
+dictionery = {}
+for i in range(len(text_list)): dictionery[i] = text_list[i]
+
+
+def generate_list(numbers):
+    if len(numbers) == 0: return []
+    if len(numbers) == 1: return [numbers]
+    
+    result = []
+    for i in range(len(numbers)):
+        arr = numbers[i]
+        data = numbers[:i] + numbers[i+1:]
+        
+        for j in generate_list(data): result.append([arr] + j)
+    return result
+
+
+numbers = []
+for i in range(len(text_list)): numbers.append(i)
+
+data = generate_list(numbers)
+for i in range(len(data)):
+    for j in range(len(data[i])):
+        print(f"{dictionery[data[i][j]]} ", end='')
+    print()
